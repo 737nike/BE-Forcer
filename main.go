@@ -9,10 +9,15 @@ import (
 	"time"
 )
 
+var (
+	answer string
+	sI     syscall.StartupInfo
+	pI     syscall.ProcessInformation
+)
+
 func main() {
 	fmt.Println("Is Fortnite in lobby?")
 	fmt.Println("(y/N): ")
-	var answer string
 	fmt.Scan(&answer)
 	answer = strings.TrimSpace(answer)
 	answer = strings.ToLower(answer)
@@ -31,8 +36,6 @@ func main() {
 		time.Sleep(3 * time.Second)
 		fmt.Println("Starting BE Launcher")
 		//Using syscall to spawn a parrent process
-		var sI syscall.StartupInfo
-		var pI syscall.ProcessInformation
 		argv := syscall.StringToUTF16Ptr("C:\\Program Files\\Epic Games\\Fortnite\\FortniteGame\\Binaries\\Win64\\FortniteClient-Win64-Shipping_BE.exe")
 		err := syscall.CreateProcess(
 			nil,
